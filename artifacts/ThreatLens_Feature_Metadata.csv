@@ -1,0 +1,79 @@
+Feature,Data_Type,Missing_Count,Unique_Values,Role
+Protocol,int8,0,3,Input Feature
+Flow Duration,int32,0,1050898,Input Feature
+Total Fwd Packets,int32,0,1432,Input Feature
+Total Backward Packets,int32,0,1747,Input Feature
+Fwd Packets Length Total,int32,0,17928,Input Feature
+Bwd Packets Length Total,int32,0,64698,Input Feature
+Fwd Packet Length Max,int16,0,5279,Input Feature
+Fwd Packet Length Min,int16,0,384,Input Feature
+Fwd Packet Length Mean,float32,0,85557,Input Feature
+Fwd Packet Length Std,float32,0,241199,Input Feature
+Bwd Packet Length Max,int16,0,4838,Input Feature
+Bwd Packet Length Min,int16,0,583,Input Feature
+Bwd Packet Length Mean,float32,0,133411,Input Feature
+Bwd Packet Length Std,float32,0,234225,Input Feature
+Flow Bytes/s,float64,0,1593956,Input Feature
+Flow Packets/s,float64,0,1240914,Input Feature
+Flow IAT Mean,float32,0,1139154,Input Feature
+Flow IAT Std,float32,0,999578,Input Feature
+Flow IAT Max,int32,0,580288,Input Feature
+Flow IAT Min,int32,0,136316,Input Feature
+Fwd IAT Total,int32,0,493098,Input Feature
+Fwd IAT Mean,float32,0,728829,Input Feature
+Fwd IAT Std,float32,0,679079,Input Feature
+Fwd IAT Max,int32,0,437316,Input Feature
+Fwd IAT Min,int32,0,110631,Input Feature
+Bwd IAT Total,int32,0,414928,Input Feature
+Bwd IAT Mean,float32,0,663929,Input Feature
+Bwd IAT Std,float32,0,700222,Input Feature
+Bwd IAT Max,int32,0,368285,Input Feature
+Bwd IAT Min,int32,0,66074,Input Feature
+Fwd PSH Flags,int8,0,2,Input Feature
+Bwd PSH Flags,int8,0,1,Input Feature
+Fwd URG Flags,int8,0,2,Input Feature
+Bwd URG Flags,int8,0,1,Input Feature
+Fwd Header Length,int64,0,3771,Input Feature
+Bwd Header Length,int32,0,3945,Input Feature
+Fwd Packets/s,float32,0,1145875,Input Feature
+Bwd Packets/s,float32,0,1038547,Input Feature
+Packet Length Min,int16,0,215,Input Feature
+Packet Length Max,int16,0,5708,Input Feature
+Packet Length Mean,float32,0,194339,Input Feature
+Packet Length Std,float32,0,396472,Input Feature
+Packet Length Variance,float32,0,395922,Input Feature
+FIN Flag Count,int8,0,2,Input Feature
+SYN Flag Count,int8,0,2,Input Feature
+RST Flag Count,int8,0,2,Input Feature
+PSH Flag Count,int8,0,2,Input Feature
+ACK Flag Count,int8,0,2,Input Feature
+URG Flag Count,int8,0,2,Input Feature
+CWE Flag Count,int8,0,2,Input Feature
+ECE Flag Count,int8,0,2,Input Feature
+Down/Up Ratio,int16,0,31,Input Feature
+Avg Packet Size,float32,0,191898,Input Feature
+Avg Fwd Segment Size,float32,0,85557,Input Feature
+Avg Bwd Segment Size,float32,0,133411,Input Feature
+Fwd Avg Bytes/Bulk,int8,0,1,Input Feature
+Fwd Avg Packets/Bulk,int8,0,1,Input Feature
+Fwd Avg Bulk Rate,int8,0,1,Input Feature
+Bwd Avg Bytes/Bulk,int8,0,1,Input Feature
+Bwd Avg Packets/Bulk,int8,0,1,Input Feature
+Bwd Avg Bulk Rate,int8,0,1,Input Feature
+Subflow Fwd Packets,int32,0,1432,Input Feature
+Subflow Fwd Bytes,int32,0,17928,Input Feature
+Subflow Bwd Packets,int32,0,1747,Input Feature
+Subflow Bwd Bytes,int32,0,64738,Input Feature
+Init Fwd Win Bytes,int32,0,12144,Input Feature
+Init Bwd Win Bytes,int32,0,13110,Input Feature
+Fwd Act Data Packets,int32,0,1093,Input Feature
+Fwd Seg Size Min,int32,0,28,Input Feature
+Active Mean,float32,0,325795,Input Feature
+Active Std,float32,0,201882,Input Feature
+Active Max,int32,0,299565,Input Feature
+Active Min,int32,0,175670,Input Feature
+Idle Mean,float32,0,197144,Input Feature
+Idle Std,float32,0,196816,Input Feature
+Idle Max,int32,0,149737,Input Feature
+Idle Min,int32,0,223888,Input Feature
+Label,object,0,15,Original Target

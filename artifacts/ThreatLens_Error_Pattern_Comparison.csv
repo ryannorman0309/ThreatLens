@@ -1,0 +1,4 @@
+Model,Total Errors,Unique Misclassification Types
+Logistic Regression,133935,79
+Decision Tree,3135,46
+Random Forest,1826,35

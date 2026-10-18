@@ -1,0 +1,4 @@
+Model,Total Samples,Correct Predictions,Misclassified Samples,Error Rate
+Logistic Regression,446362,312427,133935,30.01
+Decision Tree,446362,443227,3135,0.7
+Random Forest,446362,444536,1826,0.41

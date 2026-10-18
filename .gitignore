@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python environments
+.venv/
+env/
+venv/
+ENV/
+
+# Large model artifacts (exceeding GitHub 100MB limit)
+# Note: models/random_forest.joblib is 106.3MB, exceeding GitHub's file limit.
+models/random_forest.joblib
+*.h5
+*.weights
+
+# Local SQLite databases
+*.db
+*.sqlite3
+*.sqlite
+data/*.db
+
+# Large dataset files and exports
+*.parquet
+ThreatLens_*.csv
+!artifacts/ThreatLens_Feature_Metadata.csv
+!artifacts/ThreatLens_Feature_Importance.csv
+!artifacts/ThreatLens_Model_Evaluation.csv
+!artifacts/ThreatLens_LSTM_Evaluation.csv
+!artifacts/ThreatLens_Task9_Model_Comparison.csv
+!artifacts/ThreatLens_Error_Summary.csv
+!artifacts/ThreatLens_Error_Pattern_Comparison.csv
+!artifacts/ThreatLens_DecisionTree_Misclassifications.csv
+!artifacts/ThreatLens_Logistic_Misclassifications.csv
+!artifacts/ThreatLens_RandomForest_Misclassifications.csv
+!artifacts/sample_test_logs.csv
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Streamlit local settings & cache
+.streamlit/secrets.toml
+
+# OS generated files
+.DS_Store
+Thumbs.db

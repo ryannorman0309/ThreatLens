@@ -1,0 +1,580 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/threatlens"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/threatlens">
+    <Prefix name="" IRI="http://www.semanticweb.org/1023170/ontologies/2026/7/untitled-ontology-2/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#AuthenticationAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Botnet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BruteForceAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Critical"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DDoSAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Device"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DoSAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Evidence"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Explanation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#High"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IPAddress"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InfiltrationAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Low"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MalwareAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Medium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NetworkAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NetworkEntity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PortScan"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Prediction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RiskLevel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Rule"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SQLInjection"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SecurityEvent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SecurityLog"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Threat"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#WebAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#XSS"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#user"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#containsEvent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#detectedByRule"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasEvidence"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasExplanation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasPrediction"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasRiskLevel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#indicatesThreat"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#originatesFrom"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#targets"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#uploads"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasByteCount"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasConfidenceScore"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDescription"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDestinationIP"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDestinationPort"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasFailedLoginCount"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasFlowDuration"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPacketCount"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasProtocol"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasRequestCount"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasSourceIP"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasSourcePort"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasTimestamp"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasUniquePortCount"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Botnet_001"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BruteForce_001"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CriticalRisk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DDoS_001"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DoS_001"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Event_001"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#HighRisk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#IP_192_168_1_10"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#IP_192_168_1_20"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#LowRisk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MediumRisk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#PortScan_001"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#RiskLevel"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Rule_001"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Rule_002"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Rule_003"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Rule_004"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Rule_005"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Rule_006"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#WebAttack_001"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#AuthenticationAttack"/>
+        <Class IRI="#Threat"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Botnet"/>
+        <Class IRI="#MalwareAttack"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BruteForceAttack"/>
+        <Class IRI="#AuthenticationAttack"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Critical"/>
+        <Class IRI="#RiskLevel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DDoSAttack"/>
+        <Class IRI="#NetworkAttack"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Device"/>
+        <Class IRI="#NetworkEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DoSAttack"/>
+        <Class IRI="#NetworkAttack"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#High"/>
+        <Class IRI="#RiskLevel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IPAddress"/>
+        <Class IRI="#NetworkEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InfiltrationAttack"/>
+        <Class IRI="#Threat"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Low"/>
+        <Class IRI="#RiskLevel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MalwareAttack"/>
+        <Class IRI="#Threat"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Medium"/>
+        <Class IRI="#RiskLevel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NetworkAttack"/>
+        <Class IRI="#Threat"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PortScan"/>
+        <Class IRI="#NetworkAttack"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SQLInjection"/>
+        <Class IRI="#WebAttack"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#WebAttack"/>
+        <Class IRI="#Threat"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#XSS"/>
+        <Class IRI="#WebAttack"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#Threat"/>
+        <NamedIndividual IRI="#Botnet_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Threat"/>
+        <NamedIndividual IRI="#BruteForce_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RiskLevel"/>
+        <NamedIndividual IRI="#CriticalRisk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Threat"/>
+        <NamedIndividual IRI="#DDoS_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Threat"/>
+        <NamedIndividual IRI="#DoS_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#SecurityEvent"/>
+        <NamedIndividual IRI="#Event_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RiskLevel"/>
+        <NamedIndividual IRI="#HighRisk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#IPAddress"/>
+        <NamedIndividual IRI="#IP_192_168_1_10"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#IPAddress"/>
+        <NamedIndividual IRI="#IP_192_168_1_20"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RiskLevel"/>
+        <NamedIndividual IRI="#LowRisk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RiskLevel"/>
+        <NamedIndividual IRI="#MediumRisk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Threat"/>
+        <NamedIndividual IRI="#PortScan_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Rule"/>
+        <NamedIndividual IRI="#Rule_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Rule"/>
+        <NamedIndividual IRI="#Rule_002"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Rule"/>
+        <NamedIndividual IRI="#Rule_003"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Rule"/>
+        <NamedIndividual IRI="#Rule_004"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Rule"/>
+        <NamedIndividual IRI="#Rule_005"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Rule"/>
+        <NamedIndividual IRI="#Rule_006"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Threat"/>
+        <NamedIndividual IRI="#WebAttack_001"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#detectedByRule"/>
+        <NamedIndividual IRI="#BruteForce_001"/>
+        <NamedIndividual IRI="#Rule_001"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasRiskLevel"/>
+        <NamedIndividual IRI="#BruteForce_001"/>
+        <NamedIndividual IRI="#HighRisk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#indicatesThreat"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <NamedIndividual IRI="#BruteForce_001"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#originatesFrom"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <NamedIndividual IRI="#IP_192_168_1_10"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#targets"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <NamedIndividual IRI="#IP_192_168_1_20"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDestinationIP"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <Literal>192.168.1.20</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDestinationPort"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">22</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasFailedLoginCount"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasProtocol"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <Literal>TCP</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSourceIP"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <Literal>192.168.1.10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSourcePort"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">50123</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTimestamp"/>
+        <NamedIndividual IRI="#Event_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2017-07-04T10:30:00</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#containsEvent"/>
+        <Class IRI="#SecurityLog"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#detectedByRule"/>
+        <Class IRI="#Threat"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasEvidence"/>
+        <Class IRI="#Threat"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasExplanation"/>
+        <Class IRI="#Prediction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasPrediction"/>
+        <Class IRI="#SecurityEvent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasRiskLevel"/>
+        <Class IRI="#Threat"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#indicatesThreat"/>
+        <Class IRI="#SecurityEvent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#originatesFrom"/>
+        <Class IRI="#SecurityEvent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#targets"/>
+        <Class IRI="#SecurityEvent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#uploads"/>
+        <Class IRI="#user"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#containsEvent"/>
+        <Class IRI="#SecurityEvent"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#detectedByRule"/>
+        <Class IRI="#Rule"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasEvidence"/>
+        <Class IRI="#Evidence"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasExplanation"/>
+        <Class IRI="#Explanation"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasPrediction"/>
+        <Class IRI="#Prediction"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasRiskLevel"/>
+        <Class IRI="#RiskLevel"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#indicatesThreat"/>
+        <Class IRI="#Threat"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#originatesFrom"/>
+        <Class IRI="#IPAddress"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#targets"/>
+        <Class IRI="#Device"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#uploads"/>
+        <Class IRI="#SecurityLog"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasByteCount"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasConfidenceScore"/>
+        <Class IRI="#Prediction"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDescription"/>
+        <Class IRI="#Prediction"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDestinationIP"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDestinationPort"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasFailedLoginCount"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasFlowDuration"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasPacketCount"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasProtocol"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasRequestCount"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasSourceIP"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasSourcePort"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasTimestamp"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasUniquePortCount"/>
+        <Class IRI="#SecurityEvent"/>
+    </DataPropertyDomain>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
