@@ -46,62 +46,70 @@ def run_decision_pipeline(
             row_votes[name] = pred_val
             votes_list.append(pred_val)
 
-        counts = Counter(votes_list)
-        most_common = counts.most_common()
-        top_class, top_count = most_common[0]
+        vote_counts = Counter(votes_list)
+        highest_count = max(vote_counts.values())
 
-        # Calculate model agreement
-        agreement = top_count / total_models
-        model_agreements.append(round(agreement, 2))
+        # Do not arbitrarily select a class if the vote is tied
+        winners = [
+            label for label, count in vote_counts.items()
+            if count == highest_count
+        ]
 
-        # Check for tie among top classes
-        is_tie = False
-        if len(most_common) > 1 and most_common[1][1] == top_count:
-            is_tie = True
-
-        # Build Explanation String
-        pred_dict_str = ", ".join(f"'{k}': np.int64({v})" for k, v in row_votes.items())
-        agreement_pct = int(round(agreement * 100))
-        base_explanation = f"Predictions: {{{pred_dict_str}}}. Agreement: {agreement_pct}%."
+        consensus = winners[0] if len(winners) == 1 else None
+        agreement = highest_count / total_models
+        model_agreements.append(round(agreement, 3))
 
         is_rule = bool(rule_triggered[i])
         ev_str = rule_evidence[i]
 
-        if is_rule and ev_str != "None":
-            full_explanation = f"{base_explanation} AI rule evidence: {ev_str}."
-        else:
-            full_explanation = f"{base_explanation} No AI rules triggered."
-
-        explanations.append(full_explanation)
-
-        # Decision Status and Resolution Logic
-        if is_tie or agreement < 0.5:
-            # Model disagreement - ambiguous classification
+        if consensus is None:
+            final_status = "Model disagreement - investigate"
             predicted_classes.append(None)
             predicted_labels.append("Uncertain (Disagreement)")
             severities.append("High")  # Unresolved anomaly escalated
             threat_cats.append("Ambiguous Disagreement")
-            decision_statuses.append("Model disagreement - investigate")
-            recommended_actions.append(
-                "Review the original log and compare model outputs. Escalate for analyst review if suspicious."
+            action = (
+                "Review the original log and compare model outputs. "
+                "Escalate for analyst review if suspicious."
             )
         else:
-            predicted_classes.append(top_class)
-            lbl = CLASS_NAMES.get(top_class, f"Unknown ({top_class})")
+            predicted_classes.append(consensus)
+            lbl = CLASS_NAMES.get(consensus, f"Unknown ({consensus})")
             predicted_labels.append(lbl)
             severities.append(SEVERITY_LEVELS.get(lbl, "Medium"))
             threat_cats.append(THREAT_CATEGORIES.get(lbl, "Unknown Threat"))
 
             if is_rule:
-                decision_statuses.append("Rule alert - investigate")
-                recommended_actions.append(
-                    "Inspect the rule-triggering fields and verify the event against source logs before taking action."
+                final_status = "Rule alert - investigate"
+                action = (
+                    "Inspect the rule-triggering fields and verify the event "
+                    "against source logs before taking action."
+                )
+            elif agreement < 0.75:
+                final_status = "Low agreement - investigate"
+                action = (
+                    "Review the event and validate it against additional "
+                    "security evidence."
                 )
             else:
-                decision_statuses.append("Model consensus - review predicted class")
-                recommended_actions.append(
-                    "Review the predicted class and supporting evidence before marking the event resolved."
+                final_status = "Model consensus - review predicted class"
+                action = (
+                    "Review the predicted class and supporting evidence. "
+                    "Do not treat model consensus alone as proof of safety."
                 )
+
+        decision_statuses.append(final_status)
+        recommended_actions.append(action)
+
+        # Build Explanation String matching Task 9 Colab
+        pred_dict_str = ", ".join(f"'{k}': np.int64({v})" for k, v in row_votes.items())
+        agreement_pct = int(round(agreement * 100))
+        full_explanation = (
+            f"Predictions: {{{pred_dict_str}}}. "
+            f"Agreement: {agreement_pct}%. "
+            f"AI rule evidence: {ev_str}."
+        )
+        explanations.append(full_explanation)
 
     # Assemble comprehensive results DataFrame
     results_df = pd.DataFrame({

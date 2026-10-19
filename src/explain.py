@@ -4,15 +4,22 @@ import os
 import pandas as pd
 import numpy as np
 from typing import Dict, Any, List, Optional
-from src.config import ARTIFACTS_DIR, RULE_THRESHOLDS, CLASS_NAMES, setup_logger
+from src.config import ARTIFACTS_DIR, MODELS_DIR, RULE_THRESHOLDS, CLASS_NAMES, setup_logger
 
 logger = setup_logger("threatlens.explain")
 
+def _find_csv(filename: str):
+    for directory in [MODELS_DIR, ARTIFACTS_DIR]:
+        p = directory / filename
+        if p.exists():
+            return p
+    return None
+
 def get_feature_importance_data() -> pd.DataFrame:
     """Loads precomputed feature importance and mutual information from Task 5/8."""
-    path = ARTIFACTS_DIR / "ThreatLens_Feature_Importance.csv"
-    if not os.path.exists(path):
-        logger.warning("Feature importance file missing at %s", path)
+    path = _find_csv("ThreatLens_Feature_Importance.csv")
+    if not path:
+        logger.warning("Feature importance file missing")
         return pd.DataFrame()
 
     df = pd.read_csv(path)
@@ -24,17 +31,18 @@ def get_feature_importance_data() -> pd.DataFrame:
 def get_model_misclassifications() -> Dict[str, pd.DataFrame]:
     """Loads error pattern and misclassification breakdowns from Task 8."""
     result = {}
-    files = {
-        "Decision Tree": ARTIFACTS_DIR / "ThreatLens_DecisionTree_Misclassifications.csv",
-        "Logistic Regression": ARTIFACTS_DIR / "ThreatLens_Logistic_Misclassifications.csv",
-        "Random Forest": ARTIFACTS_DIR / "ThreatLens_RandomForest_Misclassifications.csv",
-        "Error Summary": ARTIFACTS_DIR / "ThreatLens_Error_Summary.csv",
-        "Error Patterns": ARTIFACTS_DIR / "ThreatLens_Error_Pattern_Comparison.csv",
+    file_map = {
+        "Decision Tree": "ThreatLens_DecisionTree_Misclassifications.csv",
+        "Logistic Regression": "ThreatLens_Logistic_Misclassifications.csv",
+        "Random Forest": "ThreatLens_RandomForest_Misclassifications.csv",
+        "Error Summary": "ThreatLens_Error_Summary.csv",
+        "Error Patterns": "ThreatLens_Error_Pattern_Comparison.csv",
     }
 
-    for name, path in files.items():
-        if os.path.exists(path):
-            df = pd.read_csv(path)
+    for name, fname in file_map.items():
+        p = _find_csv(fname)
+        if p:
+            df = pd.read_csv(p)
             # Add readable class labels if Actual and Predicted columns exist
             if "Actual" in df.columns and "Predicted" in df.columns:
                 df["Actual_Name"] = df["Actual"].map(CLASS_NAMES)

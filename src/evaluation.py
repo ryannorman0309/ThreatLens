@@ -5,24 +5,30 @@ import pandas as pd
 import numpy as np
 from typing import Dict, Any, Optional, Tuple
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
-from src.config import ARTIFACTS_DIR, CLASS_NAMES, setup_logger
+from src.config import ARTIFACTS_DIR, MODELS_DIR, CLASS_NAMES, setup_logger
 
 logger = setup_logger("threatlens.evaluation")
 
+def _find_csv(filename: str):
+    for directory in [MODELS_DIR, ARTIFACTS_DIR]:
+        p = directory / filename
+        if p.exists():
+            return p
+    return None
+
 def get_precomputed_benchmarks() -> pd.DataFrame:
-    """Loads validated academic benchmark metrics from Task 9/10 artifacts."""
-    comp_path = ARTIFACTS_DIR / "ThreatLens_Task9_Model_Comparison.csv"
-    if os.path.exists(comp_path):
-        df = pd.read_csv(comp_path)
-        return df
+    """Loads validated academic benchmark metrics from Task 9/10 artifacts or models."""
+    comp_path = _find_csv("ThreatLens_Task9_Model_Comparison.csv")
+    if comp_path:
+        return pd.read_csv(comp_path)
 
     # Fallback to individual evaluation files
-    m_path = ARTIFACTS_DIR / "ThreatLens_Model_Evaluation.csv"
-    lstm_path = ARTIFACTS_DIR / "ThreatLens_LSTM_Evaluation.csv"
+    m_path = _find_csv("ThreatLens_Model_Evaluation.csv")
+    lstm_path = _find_csv("ThreatLens_LSTM_Evaluation.csv")
     frames = []
-    if os.path.exists(m_path):
+    if m_path:
         frames.append(pd.read_csv(m_path))
-    if os.path.exists(lstm_path):
+    if lstm_path:
         frames.append(pd.read_csv(lstm_path))
 
     if frames:

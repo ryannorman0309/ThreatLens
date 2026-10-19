@@ -24,7 +24,7 @@ from src.config import (
 from src.model_loader import get_all_models, get_model_status
 from src.preprocessing import validate_and_prepare_features
 from src.predict import predict_all_models
-from src.rules import evaluate_rules, get_rule_definitions
+from src.rules import evaluate_rules, get_rule_definitions, get_task2_domain_rules
 from src.decision_engine import run_decision_pipeline
 from src.explain import get_feature_importance_data, get_model_misclassifications, explain_single_record
 from src.evaluation import get_precomputed_benchmarks, evaluate_predictions_against_ground_truth
@@ -367,15 +367,16 @@ elif navigation == "🔍 Log Triage & Analysis":
 
 
 # -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # PAGE 3: MODEL BENCHMARKS (TASK 10)
 # -----------------------------------------------------------------------------
 elif navigation == "📊 Model Benchmarks (Task 10)":
     st.markdown('<div class="brand-title">Model Evaluation & Benchmark Validation</div>', unsafe_allow_html=True)
-    st.markdown("Validated metrics and comparative performance across all four models on the held-out test dataset.")
+    st.markdown("Validated metrics and comparative performance across all four models on the held-out test dataset (446,362 samples).")
 
     benchmarks_df = get_precomputed_benchmarks()
     if not benchmarks_df.empty:
-        st.markdown("### 🏆 Comprehensive Model Comparison")
+        st.markdown("### 🏆 Comprehensive Model Comparison (Held-Out Test Set)")
         st.dataframe(benchmarks_df, use_container_width=True, hide_index=True)
 
         fig_bench = go.Figure()
@@ -393,9 +394,56 @@ elif navigation == "📊 Model Benchmarks (Task 10)":
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
             font=dict(color="#F3F4F6"),
-            title="Model Evaluation Metrics Comparison"
+            title="Model Evaluation Metrics Comparison (Tasks 6, 8, 9 & 10)"
         )
         st.plotly_chart(fig_bench, use_container_width=True)
+
+    st.markdown("### 📊 Task 9 Decision Engine Population Breakdown (N = 446,362 Test Samples)")
+    col_t1, col_t2 = st.columns(2)
+    with col_t1:
+        status_dist = pd.DataFrame([
+            {"Decision Status": "Model consensus - review predicted class", "Records": 256790, "Percentage": 57.53},
+            {"Decision Status": "Rule alert - investigate", "Records": 186448, "Percentage": 41.77},
+            {"Decision Status": "Model disagreement - investigate", "Records": 3117, "Percentage": 0.70},
+            {"Decision Status": "Low agreement - investigate", "Records": 7, "Percentage": 0.002},
+        ])
+        fig_status = px.pie(
+            status_dist,
+            names="Decision Status",
+            values="Records",
+            title="Test Set Decision Status Breakdown",
+            hole=0.45,
+            color_discrete_sequence=["#10B981", "#F59E0B", "#EF4444", "#3B82F6"]
+        )
+        fig_status.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#F3F4F6"),
+            margin=dict(t=40, b=10, l=10, r=10)
+        )
+        st.plotly_chart(fig_status, use_container_width=True)
+
+    with col_t2:
+        agreement_dist = pd.DataFrame([
+            {"Agreement Level": "100% Agreement (4/4 Models)", "Records": 426937, "Percentage": 95.65},
+            {"Agreement Level": "75% Agreement (3/4 Models)", "Records": 16230, "Percentage": 3.64},
+            {"Agreement Level": "50% Agreement (2/4 Models)", "Records": 3195, "Percentage": 0.72},
+        ])
+        fig_agree = px.pie(
+            agreement_dist,
+            names="Agreement Level",
+            values="Records",
+            title="Test Set Multi-Model Agreement Breakdown",
+            hole=0.45,
+            color_discrete_sequence=["#00E5FF", "#3B82F6", "#F97316"]
+        )
+        fig_agree.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#F3F4F6"),
+            margin=dict(t=40, b=10, l=10, r=10)
+        )
+        st.plotly_chart(fig_agree, use_container_width=True)
 
     # Dynamic Evaluation Mode if Ground Truth was uploaded in the current session
     if st.session_state.last_results is not None and st.session_state.last_ground_truth is not None:
@@ -464,7 +512,24 @@ elif navigation == "🧠 Explainability & AI Rules":
     st.divider()
     st.markdown("### 📉 Misclassification Patterns & Error Distributions")
     misclass = get_model_misclassifications()
-    tab1, tab2, tab3 = st.tabs(["Random Forest Errors", "Decision Tree Errors", "Logistic Regression Errors"])
+    tab_ov, tab1, tab2, tab3, tab4 = st.tabs([
+        "📊 Error Summary & Comparison",
+        "🌲 Random Forest Errors",
+        "🌿 Decision Tree Errors",
+        "📈 Logistic Regression Errors",
+        "📜 Task 2 Domain Expert Rules"
+    ])
+
+    with tab_ov:
+        col_es1, col_es2 = st.columns(2)
+        with col_es1:
+            st.markdown("#### Model Error Summary")
+            if "Error Summary" in misclass:
+                st.dataframe(misclass["Error Summary"], use_container_width=True, hide_index=True)
+        with col_es2:
+            st.markdown("#### Error Pattern Comparison")
+            if "Error Patterns" in misclass:
+                st.dataframe(misclass["Error Patterns"], use_container_width=True, hide_index=True)
 
     with tab1:
         if "Random Forest" in misclass:
@@ -475,6 +540,11 @@ elif navigation == "🧠 Explainability & AI Rules":
     with tab3:
         if "Logistic Regression" in misclass:
             st.dataframe(misclass["Logistic Regression"], use_container_width=True, hide_index=True)
+    with tab4:
+        st.markdown("#### Forward-Chaining Domain Rules (Task 2 Knowledge Base)")
+        t2_rules = get_task2_domain_rules()
+        t2_df = pd.DataFrame(t2_rules)[["id", "name", "type", "conditions", "conclusion", "risk", "explanation"]]
+        st.dataframe(t2_df, use_container_width=True, hide_index=True)
 
 
 # -----------------------------------------------------------------------------
@@ -557,3 +627,42 @@ elif navigation == "ℹ️ Architecture & Ethical Scope":
     3. **Privacy by Design:**
        ThreatLens operates on numerical traffic flow statistics (packet lengths, inter-arrival times, window sizes) rather than private user payload data or plaintext communications.
     """)
+
+    st.divider()
+    st.markdown("### 🔍 Task 3: State-Space Search & Graph Transition Model")
+    st.markdown(
+        "ThreatLens formalizes the security log analysis workflow as a **state-space search graph** where an initial unparsed log "
+        "navigates transitions toward an actionable goal state."
+    )
+
+    col_ss1, col_ss2 = st.columns([1, 1])
+    with col_ss1:
+        st.markdown("#### Graph Transitions & Step Costs")
+        search_transitions = pd.DataFrame([
+            {"From State": "START", "Action": "Parse log", "To State": "LOG_PARSED", "Cost": 1},
+            {"From State": "START", "Action": "Validate log", "To State": "LOG_VALIDATED", "Cost": 2},
+            {"From State": "LOG_PARSED", "Action": "Run ML prediction", "To State": "ML_PREDICTED", "Cost": 1},
+            {"From State": "LOG_PARSED", "Action": "Apply rule base", "To State": "RULE_CHECKED", "Cost": 5},
+            {"From State": "LOG_VALIDATED", "Action": "Apply rule base", "To State": "RULE_CHECKED", "Cost": 2},
+            {"From State": "RULE_CHECKED", "Action": "Run ML prediction", "To State": "ML_PREDICTED", "Cost": 2},
+            {"From State": "ML_PREDICTED", "Action": "Run LSTM deep learning", "To State": "DL_PREDICTED", "Cost": 1},
+            {"From State": "ML_PREDICTED", "Action": "Generate explanation", "To State": "EXPLANATION_GENERATED", "Cost": 4},
+            {"From State": "DL_PREDICTED", "Action": "Generate explanation", "To State": "EXPLANATION_GENERATED", "Cost": 1},
+            {"From State": "EXPLANATION_GENERATED", "Action": "Generate final report", "To State": "REPORT_GENERATED", "Cost": 1},
+            {"From State": "REPORT_GENERATED", "Action": "Close incident triage", "To State": "GOAL", "Cost": 1},
+        ])
+        st.dataframe(search_transitions, use_container_width=True, hide_index=True)
+
+    with col_ss2:
+        st.markdown("#### Search Strategy Benchmark Comparison")
+        search_bench = pd.DataFrame([
+            {"Algorithm": "BFS (Breadth-First Search)", "Path Cost": 9, "Transitions": 5, "Expanded States": 9, "Optimal Cost": "No", "Execution Time": "0.016 ms"},
+            {"Algorithm": "DFS (Depth-First Search)", "Path Cost": 9, "Transitions": 5, "Expanded States": 6, "Optimal Cost": "No", "Execution Time": "0.009 ms"},
+            {"Algorithm": "A* Search (Admissible Heuristic)", "Path Cost": 6, "Transitions": 6, "Expanded States": 9, "Optimal Cost": "Yes (Optimal)", "Execution Time": "0.024 ms"},
+        ])
+        st.dataframe(search_bench, use_container_width=True, hide_index=True)
+
+        st.info(
+            "**Key Finding (Task 3):** A* Search achieves the lowest overall path cost (**6 vs 9**) by discovering that invoking the Deep Learning model "
+            "(`DL_PREDICTED`) reduces downstream explanation generation cost from 4 to 1, demonstrating that intelligent heuristics optimize operational SOC workload."
+        )

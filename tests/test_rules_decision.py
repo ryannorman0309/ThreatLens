@@ -14,7 +14,7 @@ def test_rule_evaluation():
 
     triggered, evidence, counts = evaluate_rules(df_low)
     assert not triggered[0]
-    assert evidence[0] == "None"
+    assert evidence[0] == "No configured outlier rule matched"
     assert counts[0] == 0
 
     # Construct anomalous record (above threshold for 2 features)
@@ -38,7 +38,7 @@ def test_decision_engine_consensus_and_disagreement():
         "LSTM": np.array([0])
     }
     rules_case1 = np.array([False])
-    evidence_case1 = ["None"]
+    evidence_case1 = ["No configured outlier rule matched"]
     res1 = run_decision_pipeline(preds_case1, {}, rules_case1, evidence_case1)
     assert res1.iloc[0]["Predicted_Class"] == 0
     assert res1.iloc[0]["Model_Agreement"] == 1.0
@@ -66,7 +66,7 @@ def test_decision_engine_consensus_and_disagreement():
         "LSTM": np.array([0])
     }
     rules_case3 = np.array([False])
-    evidence_case3 = ["None"]
+    evidence_case3 = ["No configured outlier rule matched"]
     res3 = run_decision_pipeline(preds_case3, {}, rules_case3, evidence_case3)
     assert pd.isna(res3.iloc[0]["Predicted_Class"])
     assert res3.iloc[0]["Model_Agreement"] == 0.5

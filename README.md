@@ -108,8 +108,14 @@ ThreatLens/
 │   ├── ThreatLens_RandomForest_Misclassifications.csv
 │   └── ThreatLens_Ontology.owl     # Protégé OWL ontology of classes and relations
 ├── notebooks/
-│   ├── ThreatLens_Task4_Complete.ipynb
-│   └── ThreatLens_Task3_State_Space_Search_Colab_Completed.ipynb
+│   ├── ThreatLens_Task2_Rule_Engine.ipynb                          # Task 2: Rule-Based Expert System (Forward Chaining)
+│   ├── ThreatLens_Task3_State_Space_Search_Colab_Completed.ipynb   # Task 3: State-Space Search (BFS, DFS, A* Heuristic)
+│   ├── ThreatLens_Task4_Complete.ipynb                             # Task 4: EDA, Cleaning, Deduplication & Preprocessing
+│   ├── ThreatLens_Task5_Feature_Engineering.ipynb                  # Task 5: Feature Extraction & Top 20 Feature Selection
+│   ├── CIL_TASK6.ipynb                                             # Task 6: ML Classifiers (LR, DT, RF Training & Eval)
+│   ├── CIL_TASK7.ipynb                                             # Task 7: LSTM Deep Learning Architecture & Training
+│   ├── CIL_TASK8.ipynb                                             # Task 8: LSTM Evaluation, Activations & Error Patterns
+│   └── CIL_task9.ipynb                                             # Task 9: Multi-Model Consensus & Decision Engine
 ├── tests/
 │   ├── test_preprocessing.py       # Input validation & missing feature tests
 │   ├── test_model_loader.py        # Model loading & status tests
